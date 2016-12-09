@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="/js/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/sha/sha1.js"></script>
+        <script type="text/javascript" src="/js/async/async.min.js"></script>
+        
+        
+        <link rel="stylesheet" href="/css/main.css" type="text/css" />
+        <link href="/css/font-awesome.min.css" rel="stylesheet">
+        <style type="text/css">
+         
+                body{
+                    background-color: #F7F7F7;
+                    direction: rtl;
+                    margin: 0;
+                    color: #769897;
+                    width: 170px;
+                }
+                #title{
+                    height: 40px;
+                    line-height: 40px;
+                    text-align: center;
+                    background-color: #D9DBDA;
+                    color: #769897;
+                    font-size: 22px;
+                    font-weight: bold;
+                }
+                .button{
+                    background-color: rgb(118, 158, 158);
+                    border: none;
+                    border-radius: 2px;
+                    color: white;
+                    cursor: pointer;
+                    font-size: 15px;
+                    padding: 6px 15px;
+                }
+                .button: hover{
+                    background-color: rgb(150, 186, 185);
+                }
+                .button-b{
+                    border: none;
+                    color: rgb(118, 158, 158);
+                    display: block;
+                    cursor: pointer;
+                    margin-top: 20px;
+                    font-size: 17px;
+                    padding: 6px 15px;
+                    width: 90%;
+                    box-sizing: border-box;
+                    margin-right: auto;
+                    margin-left: auto;
+                }
+                .button-b:hover{
+                    color: white;
+                }
+                .in-select{
+                    text-align: center;
+                    font-size: 22px;
+                    color: rgb(118, 158, 158);
+                }
+                #select-count{
+                    font-size: 35px;
+                    font-weight: 600;
+                }
+                .in-select .instructions{
+                    font-size: 15px;
+                    padding: 12px;
+                }
+                .in-select .instructions-title{
+                    font-size: 17px; 
+                    font-weight: 600;
+                    color: rgb(56, 117, 170);
+                }
+                .top{
+                    width: 100%;
+                    height: 25px;
+                    background-color: rgb(215, 215, 215);
+                    text-align: left;
+                }
+                .top .cancel{
+                    cursor: pointer;
+                    color: rgb(118, 158, 158);
+                    font-size: 18px;
+                    margin-left: 4px;
+                }
+                .top .cancel:hover{
+                    color: rgb(109, 155, 194);
+                }
+                
+                #in-action{
+                    background-color: #F7F7F7;
+                    width: 100%;
+                    position: fixed;
+                    top: 0;
+                    bottom: 0;
+                    right: -105%;
+                    transition: 200ms ease-in-out right;
+                }    
+            
+                #in-action.active{
+                    right: 0%;
+                }
+                .bad-text{
+                    width: 90%;
+                    height: 100px;
+                    margin-top: 10px;
+                }
+                .span-bad-text{
+                    font-size: 15px;
+                }
+                
+                .btn-1{
+                    font-family: inherit;
+                    color: #769897;
+                    background-color: transparent;
+                    font-weight: 600;
+                    border: none;
+                    font-size: 17px;
+                    padding: 7px;
+                    position: relative;
+                    margin: 0 7px;
+                    outline: none;
+                    text-decoration: inherit;
+                    display: block;
+                    text-align: center;
+                    transition: text-shadow 0.5s;
+                    cursor: pointer;
+                }
+                .btn-1:before{
+                    content: "";
+                    height: 1px;
+                    background-color: #DDDDDD;
+                    position: absolute;
+                    bottom: 1px;
+                    left: 1px;
+                    right: 1px;
+                }
+                .btn-1:after{
+                    content: "";
+                    clear: both; 
+                    display: block;
+                }
+                .btn-1:hover{
+                    text-shadow: 1px 1px 9px #9FBFBE;
+                    color: #67B5B3;
+                }
+                .btn-1 > .text{
+                    
+                }
+                .btn-1 > .icon {
+                    font-size: 35px;
+                    display: block;
+                    float: right;
+                    margin: 6px;
+                    color: #B2B4B3;
+                    width: 35px;
+                }
+                
+                .btn-2{
+                    margin-top: 7px;
+                    border-bottom: 1px solid #DDDDDD;
+                    font-weight: normal;
+                    margin: 0 7px;
+                }
+                .btn-2 > .icon{
+                    font-size: 25px;
+                    display: block;
+                    float: right;
+                    margin: 6px;
+                    color: #B2B4B3;
+                    width: 21px;
+                    
+                }
+                .btn-2 > .text{
+                    color: #769897;
+                    font-weight: 600;
+                    font-size: 15px;
+                    cursor: pointer;
+                } 
+                .btn-2:after{
+                    content: "";
+                    clear: both; 
+                    display: block;
+                }
+                .btn-2:hover{
+                    text-shadow: 1px 1px 9px #9FBFBE;
+                    color: #67B5B3;
+                }
+                .btn-3{
+                    
+
+                }
+                .btn-3:after{
+                    content: "";
+                    clear: both; 
+                    display: block;
+                }
+                .btn-3 > .icon {
+                    background: #E0E0E0;
+                    font-size: 25px;
+                    display: block;
+                    float: right;
+                    /* margin: 6px; */
+                    height: 40px;
+                    width: 40px;
+                    color: #B2B4B3;
+                    text-align: center;
+                    position: relative;
+                }
+
+                .btn-3 > .text{
+                    display: table;
+                    text-decoration: none;
+                    color: #769897;
+                    padding: 8px;
+                }
+                
+                
+                #unread-news{
+                    background-color: red;
+                    width: 18px;
+                    height: 18px;
+                    position: absolute;
+                    font-size: 14px;
+                    font-weight: bolder;
+                    color: white;
+                    border-radius: 100%;
+                    top: 1px;
+                    left: 1px;
+                }
+        </style>
+    </head>
+    <body style="overflow: hidden;">
+        
+        <div id="report">
+            <div id="title">
+               פנל ניהול מהיר
+            </div>
+            <button id="report-image" class="btn-1">
+                <i class="icon fa fa-exclamation-triangle"></i>
+                <span class="text">
+                    דווח על תמונה!
+                </span>
+            </button> 
+            
+            <button id="report-text" class="btn-1">
+                <i class="icon fa fa-file-text-o"></i>
+                <span class="text">
+                    דווח על תוכן בעייתי
+                </span>
+            </button>
+            
+            <a class="btn-1" href="http://netfree.link/#donate" target="_blank" >
+                <i class="icon fa fa-heart-o" ></i>
+                <span class="text">
+                    תרום 
+                    <br>
+                    לנטפרי
+                </span>
+            </a>
+            <div>
+
+            </div>
+            
+            
+            
+
+    
+            <div class="btn-2">
+                <i class="fa fa-clock-o icon"></i>
+                <span class="text">
+                    <span class="text" id="check-images-time"></span>
+                    <!--
+                    כעת נבדקות התמונות שנשלחו לפני 4 דקות
+                    -->
+                </span>
+                
+            </div>
+            <div class="btn-2">    
+                <i class="fa fa-repeat icon"></i>
+                <span id="refresh-images" class="text" style="line-height: 36px;"> 
+                    רענן תמונות
+                </span>
+            </div>
+            
+            <div class="btn-3">
+                <div class="icon">
+                    <i class="fa fa-ticket icon"></i>
+                </div>
+                <a class="text" href="http://netfree.link/user#/tickets/new" target="blank">
+                    שלח פניה חדשה
+                </a>
+            </div>
+            <div class="btn-3">
+                <div class="icon">
+                    <i class="fa fa-users icon"></i>
+                </div>
+                <a class="text" href="http://netfree.link/#forum" target="blank">
+                   לפורום של נטפרי
+                </a>
+            </div>
+            <div class="btn-3">
+                <div class="icon">
+                    <i class="fa fa-envelope-o icon"></i>
+                    <span id="unread-news"></span>
+                </div>
+                <a id="news-link" class="text" href="http://forum.netfree.link/category/1" target="blank">
+                   חדשות ועדכונים
+                </a>
+            </div>
+            
+            
+            
+            
+        </div>
+            
+        <div class="" id="in-action" >
+            
+            <div class="in-select" id="in-select-image" hidden="hidden" >
+                <div class="top">
+                    <i class="fa fa-close cancel" ></i>
+                </div>
+                
+                <div class="instructions">
+                    אם אתם רואים תמונה ,
+                    שנחסמה או נפתחה ,
+                    שלא בצדק
+                    דווחו פה.
+                    <br>
+                    <b>
+                        לא לדווח על תמונות שכתוב עליהם נשלח לבדיקה. זה  מעכב את הבדיקה.
+                    </b>
+                </div>
+                <div class="instructions">
+                    הקלק לחיצה ימנית על העכבר כדי לבחור תמונה
+                </div>
+                <div>  
+                    בחרת 
+                    <br>
+                    <span id="select-count"></span>
+                    <br>
+                    תמונות
+                    <br>
+                    לסינון 
+                </div>
+                
+                <button id="send-image" class="button btn-mid"> דווח </button>
+            </div>
+            <div  class="in-select" id="in-select-text"  hidden="hidden">
+                <div class="top">
+                    <i class="fa fa-close cancel" ></i>
+                </div>
+                
+                <div class="instructions">
+                    <span class="span-bad-text"> 
+                    כאן ניתו לדווח על כל תוכן לא ראוי,
+                    השקפה לא נכונה, דברי כפירה וכדו'...
+                    </span>
+                    <textarea class="bad-text" id="bad-text-content"></textarea>
+                    <button id="send-text" class="button btn-mid"> דווח </button>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <script type="text/javascript">
+            
+            
+            (function(){
+                var countNews = +"11";
+                
+                var unreadCount = countNews - (+localStorage['read-news'] || 0);
+                
+                var $unreadnews = $("#unread-news");
+                
+                $unreadnews.text(unreadCount);
+                if(!unreadCount) $unreadnews.hide();
+                
+                
+                $("#news-link").on('click',function(){
+                    localStorage['read-news'] = countNews;
+                });
+            })();
+            
+            var callbacks = {};
+            
+            function emitMessage(name, data, callback , nodelete){
+                var token = makeToken(20);
+                if(callback)
+                    callbacks[token] = callback;
+                    
+                parent.postMessage({ token:  token , name: name, data:  data },'*');
+                if(callback && nodelete){
+                    callback.nodelete = true;
+                    return function deleteCallback(){
+                        delete callbacks[token];
+                    };
+                }
+            }
+            
+            function inActionShow(){
+                $("#in-action").addClass('active');
+            }
+            function inActionHide(){
+                $("#in-action").removeClass('active');
+            }
+            
+            function inSelect(type){
+                $(".in-select").hide();
+                $("#in-select-"+type).show();
+            }
+
+            function makeToken(length)
+            {
+                var text = "";
+                var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            
+                for( var i=0; i < length; i++ )
+                    text += possible.charAt(Math.floor(Math.random() * possible.length));
+            
+                return text;
+            }
+            
+            window.addEventListener("message", function(event){
+                
+                if(!event.data) return;
+                if(callbacks[event.data.token]){
+                    var fn = callbacks[event.data.token];
+                    if(!fn.nodelete) delete callbacks[event.data.token];
+                    fn(null,event.data.data);
+                    return;
+                }
+                
+            }, false);
+            
+            var selectImages = [];
+            
+            function mouseenterImg(event) {
+                event.preventDefault();
+                 if(event.target.tagName != "IMG" || event.target._selected) return;
+                
+                $(event.target).css('box-shadow', "0px 0px 20px #0056FF");
+                $(event.target).css('transition', "box-shadow 100ms ease-in-out");
+            }
+            
+            function mouseleaveImg(event) {
+                event.preventDefault();
+                 if(event.target.tagName != "IMG" || event.target._selected) return;
+                
+                $(event.target).css('box-shadow', "");
+            }
+        
+            function clickImg(event) {
+                event.preventDefault();
+                if(event.target.tagName != "IMG") return;
+                
+                if (event.target._selected) {
+                    $(event.target).css('box-shadow', "");
+                    var index =  selectImages.indexOf(event.target);
+                    if(index>=0) selectImages.splice(index,1);
+                }
+                else {
+                    $(event.target).css('box-shadow', "0px 0px 20px #FF0000");
+                    selectImages.push(event.target);
+                }
+                
+                
+                
+                event.target._selected = !event.target._selected;
+            }
+
+            var deleteSelectCb = false;
+            $("#report-image").on('click', function() {
+                
+                $("#select-count").text(0);
+                emitMessage('start-select',{} ,function(err,data){});
+                
+                deleteSelectCb = emitMessage('on-selected',{} ,function(err,data){
+                    $("#select-count").text(data.count);
+                },true);
+                
+                inSelect("image");
+                inActionShow();
+
+            });
+            
+            $("#report-text").on('click', function() {
+                 inSelect("text");
+                 inActionShow();
+            });
+            
+            function stopSelect(){
+                if(deleteSelectCb) deleteSelectCb();
+                emitMessage('stop-select',{} ,function(err,data){});
+                inActionHide();
+            }
+            
+            $(".cancel").on('click', function() {
+                stopSelect();
+            });
+            
+            
+            
+            
+            $("#send-image").on('click', function() {
+                
+                emitMessage('report-selected',{} ,function(err,data){
+                    stopSelect();
+                });
+                
+                emitMessage('get-selected',{} ,function(err,data){
+                    var list = data.list;
+
+                    console.log(list);
+                    
+                    $.ajax({
+                        type: 'POST',
+                        url: '/image/feedback',
+                        data: JSON.stringify({ list: list }),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json"
+                    }).done(function(data) {
+                        if(data.success){
+                           
+                        }
+                    });
+                    
+                    stopSelect();
+                });
+                
+            });
+            
+            $("#send-text").on('click', function() {
+                
+                emitMessage('get-top.location.href',{} ,function(err,data){
+                    var url = data.href;
+                    var content = $("#bad-text-content").val();
+                    
+                    $.ajax({
+                        type: 'POST',
+                        url: '/feedback/ajax/link-report',
+                        data: JSON.stringify({ url: url , content:  content }),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json"
+                    }).done(function(data) {
+                        if(data && data.ticket){
+                            window.open("/user#/tickets/ticket/" + data.ticket , '_blank');
+                        }
+                        inActionHide(); 
+                    });
+                });
+                
+            });
+            
+            $("#refresh-images").on('click',function() {
+                emitMessage("refresh-images",{} ,function( ){});
+            });
+            
+            var timeLoad = Date.now();
+            
+            var oneSec = 1000;
+            var oneMin = 60 * oneSec;
+            var oneHour =60 * oneMin;
+            
+            function updateTimeCheckImages(){
+                $.ajax('/ajax/check-images-time').always(function(data){
+                    var time = data && +data.time;
+                    var text = "";
+                    if(time > oneHour){
+                        text = "יותר משעה";
+                    }else if(time > oneMin){
+                        text = Math.round(time/oneMin) + " " +
+                        "דקות" ;
+                    }else if(time > 0){
+                        text = Math.round(time/oneSec) + " " +
+                        "שניות" ;
+                    }
+                    
+                    if(text){
+                        text = "עכשיו נבדקות התמונות שנשלחו לפני "
+                        + text;
+                    }else{
+                        text = "כעת אין תמונות שנבדקות";
+                    }
+                    $("#check-images-time").text(text);
+                    
+                    //setTimeout(updateTimeCheckImages, 10000);
+                });
+            }
+            updateTimeCheckImages();
+            //setTimeout(updateTimeCheckImages,3000);
+            
+            $("#upload-all-images-for-check").on('click',function() {
+                emitMessage("upload-all-images-for-check",{} ,function(err,data){});
+            });
+            
+            
+            var queryReqex = /(\?.*)?$/;
+            var nfoptRegex = /(?:\?)?&~nfopt\(([^\/]+)\)$/;
+            
+            var imageMapValue = {};
+            
+            var processImagesCount = 0; 
+            
+            function processImages(){
+                getNewImagesImages(function(){
+                    checkImages(function(err,haveImages){
+                        setTimeout(processImages,3000);
+                    });
+                });
+            }
+            
+            processImages();
+            
+            function getNewImagesImages(cb){
+                emitMessage("get-images-list",{} ,function(err,data){
+                    var list = data.list;
+                    
+                    var checkImagesList = [];
+
+                    list.forEach(function(link){
+                        var linkobj = imageMapValue[link] = imageMapValue[link] || {};
+                        
+                        if(!linkobj.hash){
+                            var hashObj = new jsSHA("SHA-1", "TEXT");
+                            hashObj.update(link);
+                            linkobj.hash = hashObj.getHash("HEX").substr(0,10);
+                        }else{
+                            return;
+                        }
+                        
+                        checkImagesList.push(linkobj.hash);
+                    });
+                    
+                    if(!checkImagesList.length)
+                        return cb();
+                    
+                    
+                    $.ajax({
+                    		type: "POST",
+                    		url: "/nf/image-value/get-cache",
+                    		data: JSON.stringify({ list: checkImagesList }),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json"
+                    }).always(function(data){
+                        if(data && data.list){
+                            list.forEach(function(link){
+                                var linkobj = imageMapValue[link] = imageMapValue[link] || {};
+                                var o = data.list[linkobj.hash] || {};
+                                linkobj.lastValue = o.v;
+                                linkobj.checkHash = o.h;
+                            });
+                        }
+                        cb();
+                    });
+                });
+            }
+            
+            function checkImages(cb){
+                
+                var paramRefresh= "&~nfopt(r=" + Math.floor(Math.random() * 0xffff).toString(16)  +")";
+                
+                var haveImages = false;
+                
+                async.forEachOf(imageMapValue, function (link, key, callback) {
+                    if(link.lastValue !== 0) return callback();
+                    
+                    if(!link.scanCount || (link.scanCount % 2 === 0)){
+                        haveImages = true;
+                        link.scanCount = 1;
+                        return callback();
+                    }
+                    
+                    if( link.scanCount > 20 ) return callback();
+                    link.scanCount++;
+                    
+                    $.ajax({
+                        url: '/nf/image-value/check/' + link.checkHash + "/" +  Math.random(),
+                    }).always(function(data){
+                        var value = data && data.value
+                        link.lastValue = value;
+                        if(value !== 0){
+                            var newSrc = key.replace(nfoptRegex,'').replace(queryReqex,function(all,start){
+                                return (start || '?') + paramRefresh;
+                            });
+                            emitMessage("refresh-image",{ src: key , newSrc: newSrc } ,function(){});
+                        }else{
+                            haveImages = true;
+                        }
+                        callback();
+                    });
+                },function(){
+                    cb(null,haveImages);
+                });
+            }
+            
+        </script>
+        
+    </body>
+</html>
