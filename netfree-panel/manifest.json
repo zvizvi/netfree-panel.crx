@@ -14,12 +14,12 @@
 	},
 	"icons": {
 		"128": "img/icon128.png",
-		"96":  "img/icon96.png",
-		"72":  "img/icon72.png",
-		"64":  "img/icon64.png",
-		"48":  "img/icon48.png",
-		"24":  "img/icon24.png",
-		"16":  "img/icon16.png"
+		"96": "img/icon96.png",
+		"72": "img/icon72.png",
+		"64": "img/icon64.png",
+		"48": "img/icon48.png",
+		"24": "img/icon24.png",
+		"16": "img/icon16.png"
 	},
-	"manifest_version":2
+	"manifest_version": 2
 }
